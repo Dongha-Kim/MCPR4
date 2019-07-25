@@ -14,12 +14,13 @@
 
 module.exports = function(app)
 {
-  app.get('/:player1/:player2', function(req, res){
+  app.get('/:player1/:player2/:map', function(req, res){
     var player1 = req.params.player1;
     var player2 = req.params.player2;
+    var map = req.params.map;
     let runPy = new Promise(function(success, nosuccess){
       const spawn = require("child_process").spawn
-      const pythonProcess = spawn('python', ["./Omok/pj4/app.py", player1, player2]);
+      const pythonProcess = spawn('python', ["./Omok/pj4/app.py", player1, player2,map]);
 
       pythonProcess.stdout.on('data', function(data) {
         success(data);
